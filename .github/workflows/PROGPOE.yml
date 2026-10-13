@@ -1,0 +1,38 @@
+# Compiles PROG5121-POE-PART3 and runs all of its JUnit tests
+
+name: TestPROGPOE
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events for the part-3 (default) branch
+  push:
+    branches: [ part-3 ]
+  pull_request:
+    branches: [ part-3 ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checks-out the repository under $GITHUB_WORKSPACE
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      # Compiles the source and the tests into build/classes
+      - name: Compile source and tests
+        run: |
+          mkdir -p build/classes
+          javac -Xlint:all -cp "testresources/junit-platform-console-standalone-1.6.0.jar" -d build/classes src/st10090394/*.java test/st10090394/*.java
+
+      # Runs every test class; the step fails if any test fails
+      - name: Run unit tests
+        run: java -jar "testresources/junit-platform-console-standalone-1.6.0.jar" -cp build/classes --scan-classpath
