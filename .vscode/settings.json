@@ -1,0 +1,5 @@
+{
+    "java.project.sourcePaths": ["src", "test"],
+    "java.project.referencedLibraries": ["testresources/junit-platform-console-standalone-1.6.0.jar"],
+    "java.project.outputPath": "build/classes"
+}
