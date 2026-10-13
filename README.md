@@ -36,7 +36,8 @@ Each task gets a **Task ID** in the form `first two letters of the task name : t
 │   └── Message.java      # Simple message class
 ├── test/st10090394/      # JUnit tests (LoginTest, TaskTest, MessageTest, ST10090394Test)
 ├── testresources/        # JUnit console launcher JAR
-└── nbproject/, build.xml # NetBeans / Ant project files (optional)
+├── nbproject/, build.xml # NetBeans / Ant project files (optional)
+└── .github/workflows/    # GitHub Actions workflow (PROGPOE.yml)
 ```
 
 ## Requirements
@@ -68,6 +69,10 @@ java -jar testresources/junit-platform-console-standalone-1.6.0.jar -cp build/cl
 ```
 
 Methods that open dialogs (`Task.updateTaskStatus` and `Task.displayTaskDetails`) are not unit tested because they need a display.
+
+## Continuous Integration
+
+`.github/workflows/PROGPOE.yml` runs on every push and pull request. It compiles the source and tests, then runs `MessageTest`, `LoginTest` and `TaskTest` with the JUnit console launcher. It can also be started manually from the **Actions** tab.
 
 ## References
 
